@@ -10,9 +10,9 @@ model_copies = joblib.load("catboost_model_Copies Sold.pkl")
 feature_columns = pd.read_csv("feature_columns.csv").squeeze().tolist()
 
 # Load tag, genre, and category options
-tags = pd.read_csv("tag_list.csv").squeeze().tolist()
-genres = pd.read_csv("genre_list.csv").squeeze().tolist()
-categories = pd.read_csv("category_list.csv").squeeze().tolist()
+tags = pd.read_csv("tags_list.csv").squeeze().tolist()
+genres = pd.read_csv("genres_list.csv").squeeze().tolist()
+categories = pd.read_csv("categories_list.csv").squeeze().tolist()
 publishers = pd.read_csv("publisher_list.csv").squeeze().tolist()
 
 
