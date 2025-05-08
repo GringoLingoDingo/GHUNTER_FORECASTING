@@ -25,7 +25,6 @@ time_to_beat = st.sidebar.number_input("Time to Beat (minutes)", min_value=1.0, 
 price = st.sidebar.number_input("Price ($)", min_value=0.0, value=19.99)
 followers = st.sidebar.number_input("Followers", min_value=0, value=100000)
 engagement_ratio = st.sidebar.number_input("Engagement Ratio", min_value=0.0, value=1.5)
-bayesian_score = st.sidebar.number_input("Bayesian Score", min_value=0.0, max_value=100.0, value=75.0)
 
 selected_tags = st.sidebar.multiselect("Select Tags", tags)
 selected_genres = st.sidebar.multiselect("Select Genres", genres)
@@ -35,10 +34,10 @@ selected_publisher = st.sidebar.selectbox("Select Publisher Class", publishers)
 # Build input row
 input_data = pd.DataFrame(np.zeros((1, len(feature_columns))), columns=feature_columns)
 input_data["time_to_beat"] = time_to_beat
-input_data["price"] = price
+input_data["Price"] = price
 input_data["Followers"] = followers
 input_data["engagement_ratio"] = engagement_ratio
-input_data["bayesian_score"] = bayesian_score
+
 
 col = f"Publishers Class_{selected_publisher}"
 if col in input_data.columns:
