@@ -59,7 +59,10 @@ for category in selected_categories:
         input_data.at[0, col] = 1
 
 if st.button("Predict"):
-    # 🧪 DEBUG: Check for mismatched columns
+    
+    input_data = input_data[feature_columns]     # Align with model training columns
+    input_data = input_data.astype(float)  
+
     missing_cols = set(feature_columns) - set(input_data.columns)
     extra_cols = set(input_data.columns) - set(feature_columns)
     st.write("Missing columns:", missing_cols)
