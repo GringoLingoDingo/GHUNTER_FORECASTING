@@ -58,6 +58,13 @@ for category in selected_categories:
     if col in input_data.columns:
         input_data.at[0, col] = 1
 
+
+st.write("Missing columns:", set(model_wishlists.feature_names_) - set(input_data.columns))
+st.write("Unexpected extra columns:", set(input_data.columns) - set(model_wishlists.feature_names_))
+st.write("Input dtypes:", input_data.dtypes)
+
+
+
 if st.button("Predict"):
     
     input_data = input_data[feature_columns]     # Align with model training columns
