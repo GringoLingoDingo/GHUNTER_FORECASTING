@@ -60,6 +60,20 @@ for category in selected_categories:
         input_data.at[0, col] = 1
 
 if st.button("Predict"):
+    # 🧪 DEBUG: Check for mismatched columns
+    missing_cols = set(feature_columns) - set(input_data.columns)
+    extra_cols = set(input_data.columns) - set(feature_columns)
+    st.write("Missing columns:", missing_cols)
+    st.write("Unexpected extra columns:", extra_cols)
+
+    # 🧪 DEBUG: Check data types and shape
+    st.write("Input dtypes:", input_data.dtypes)
+    st.write("Final input shape:", input_data.shape)
+
+    # Ensure all columns are numeric
+    input_data = input_data.astype(float)
+
+    # Predictions
     pred_wishlists = model_wishlists.predict(input_data)[0]
     pred_bayesian = model_bayesian.predict(input_data)[0]
     pred_copies = model_copies.predict(input_data)[0]
