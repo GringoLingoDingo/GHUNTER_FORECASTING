@@ -51,7 +51,7 @@ This machine learning project predicts key performance metrics for Steam games u
 - Integration with social media APIs (Twitch, YouTube)
 - Implementation of recurrent neural networks (RNNs)
 
-## Repository Structure
+
 ## 📁 Project Structure
 
 ```bash

@@ -3,13 +3,13 @@ import pandas as pd
 import numpy as np
 import joblib
 
-# Load the trained CatBoost model and feature columns
+
 model_wishlists = joblib.load("catboost_model_Wishlists.pkl")
 model_bayesian = joblib.load("catboost_model_bayesian_score.pkl")
 model_copies = joblib.load("catboost_model_Copies Sold.pkl")
 feature_columns = pd.read_csv("feature_columns.csv").squeeze().tolist()
 
-# Load tag, genre, and category options
+
 tags = pd.read_csv("tags_list.csv").squeeze().tolist()
 genres = pd.read_csv("genres_list.csv").squeeze().tolist()
 categories = pd.read_csv("categories_list.csv").squeeze().tolist()
@@ -19,7 +19,7 @@ publishers = pd.read_csv("publisher_list.csv").squeeze().tolist()
 st.title("🎮 Game Metrics Predictor")
 st.markdown("Enter your game's features below to predict **Wishlists**, **Bayesian Score**, and **Copies Sold**.")
 
-# Sidebar input fields
+
 st.sidebar.header("🕹️ Input Game Features")
 time_to_beat = st.sidebar.number_input("Time to Beat (minutes)", min_value=1.0, value=60.0)
 price = st.sidebar.number_input("Price ($)", min_value=0.0, value=19.99)
@@ -31,7 +31,7 @@ selected_genres = st.sidebar.multiselect("Select Genres", genres)
 selected_categories = st.sidebar.multiselect("Select Categories", categories)
 selected_publisher = st.sidebar.selectbox("Select Publisher Class", publishers)
 
-# Build input row
+
 input_data = pd.DataFrame(np.zeros((1, len(feature_columns))), columns=feature_columns)
 input_data["time_to_beat"] = time_to_beat
 input_data["Price"] = price
@@ -67,7 +67,7 @@ st.write("Input dtypes:", input_data.dtypes)
 
 if st.button("Predict"):
     
-    input_data = input_data[feature_columns]     # Align with model training columns
+    input_data = input_data[feature_columns]    
     input_data = input_data.astype(float)  
 
     missing_cols = set(feature_columns) - set(input_data.columns)
@@ -75,14 +75,14 @@ if st.button("Predict"):
     st.write("Missing columns:", missing_cols)
     st.write("Unexpected extra columns:", extra_cols)
 
-    # 🧪 DEBUG: Check data types and shape
+  
     st.write("Input dtypes:", input_data.dtypes)
     st.write("Final input shape:", input_data.shape)
 
-    # Ensure all columns are numeric
+    
     input_data = input_data.astype(float)
 
-    # Predictions
+   
     pred_wishlists = model_wishlists.predict(input_data)[0]
     pred_bayesian = model_bayesian.predict(input_data)[0]
     pred_copies = model_copies.predict(input_data)[0]
